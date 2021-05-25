@@ -39,7 +39,7 @@ var groupAnagrams = (ungrouped) => {
         let matchFound = false;
         if(ungrouped[i].length === 0){
             for(let j = 0; j < grouped.length; j++){
-                if(grouped[j].length === 0){
+                if(grouped[j][0].length === 0){
                     grouped[j].push("");
                     matchFound = true;
                     break;
@@ -60,6 +60,7 @@ var groupAnagrams = (ungrouped) => {
                     let compare = grouped[j][0];
                     let groupItem = {};
                     for(let k = 0; k < compare.length; k++){ //translate 1st item of curr anagram grouping to object of chars
+                        //for the sake of optimization, in particular for large datasets, it would be better to keep an array of object-translated strings and add new anagram groups to them at the time of adding to 'grouped', rather than making redundant translations with every incrementation
                         if(!groupItem[compare[k]]){
                             groupItem[compare[k]] = 1;
                         } else {
